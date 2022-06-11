@@ -11,11 +11,22 @@ function moveRoverForward(rover, grid) {
     // Updating the rover parameters
     roverParametersUpdate(rover, roverWasLost);
   }
-  // Condidational return - rover lost or no
+  // Condidational return
   if (rover.status === "lost") {
-    return "lost";
+    const lastKnownPositionX =
+      rover.roverLogs[rover.roverLogs.length - 1].position.x;
+    const lastKnownPositionY =
+      rover.roverLogs[rover.roverLogs.length - 1].position.y;
+    const lastKnownDirection =
+      rover.roverLogs[rover.roverLogs.length - 1].orientation;
+
+    return `Rover is lost. Last known position: {X: ${lastKnownPositionX}, Y: ${lastKnownPositionY}, Direction: ${lastKnownDirection}}`;
   } else {
-    return "not lost";
+    const currentPositionX = rover.position.x;
+    const currentPositionY = rover.position.y;
+    const curentOrientation = rover.orientation;
+
+    return `Rover current position: {X:${currentPositionX} Y:${currentPositionY}, Direction: ${curentOrientation} }`;
   }
 }
 

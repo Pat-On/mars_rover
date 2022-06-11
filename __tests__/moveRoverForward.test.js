@@ -3,6 +3,7 @@ const {
   validateMovement,
   roverParametersUpdate,
 } = require("../components/moveRoverForward");
+const { rotateRoverToRight } = require("../components/rotateRover");
 const MarsRover = require("../components/marsRover");
 const gridGenerator = require("../components/gridGenerator");
 
@@ -87,5 +88,29 @@ describe("Rover Parameters update after succesfull movement", () => {
     const roverWasLost = validateMovement(rover2022, grid);
     roverParametersUpdate(rover2022, roverWasLost);
     expect(rover2022.status).toBe("lost");
+  });
+});
+
+describe("Moving the rover on the grid", () => {
+  it("Rover did move and got lost", () => {
+    const rover2022 = new MarsRover(0, 0, "E");
+    const grid = gridGenerator(3, 6);
+
+    rotateRoverToRight(rover2022);
+    const finalPosition = moveRoverForward(rover2022, grid);
+
+    expect(finalPosition).toBe(
+      "Rover is lost. Last known position: {X: 0, Y: 0, Direction: S}"
+    );
+  });
+  it("Rover did move and is online", () => {
+    const rover2022 = new MarsRover(0, 0, "N");
+    const grid = gridGenerator(3, 6);
+
+    const finalPosition = moveRoverForward(rover2022, grid);
+
+    expect(finalPosition).toBe(
+      "Rover current position: {X:0 Y:1, Direction: N }"
+    );
   });
 });
