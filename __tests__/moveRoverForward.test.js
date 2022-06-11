@@ -3,7 +3,10 @@ const {
   validateMovement,
   roverParametersUpdate,
 } = require("../components/moveRoverForward");
-const { rotateRoverToRight } = require("../components/rotateRover");
+const {
+  rotateRoverToRight,
+  rotateRoverToLeft,
+} = require("../components/rotateRover");
 const MarsRover = require("../components/marsRover");
 const gridGenerator = require("../components/gridGenerator");
 
@@ -111,6 +114,84 @@ describe("Moving the rover on the grid", () => {
 
     expect(finalPosition).toBe(
       "Rover current position: {X:0 Y:1, Direction: N }"
+    );
+  });
+
+  it("Rover from position X:0 Y:0 after changing direction from East to North, should go to North and Get Lost after 6 movements", () => {
+    const rover2022 = new MarsRover(0, 0, "E");
+    const grid = gridGenerator(3, 6);
+
+    const afterRotation = rotateRoverToLeft(rover2022);
+
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    const finalPosition = moveRoverForward(rover2022, grid);
+
+    expect(afterRotation).toBe(
+      "Rover current position: { X:0 Y:0, Direction:N }"
+    );
+    expect(finalPosition).toBe(
+      "Rover is lost. Last known position: {X: 0, Y: 5, Direction: N}"
+    );
+  });
+
+  it("Rover from position X:0 Y:0 after changing direction from Nort to East, should go to East and Get Lost after 3 movements", () => {
+    const rover2022 = new MarsRover(0, 0, "N");
+    const grid = gridGenerator(3, 6);
+
+    const afterRotation = rotateRoverToRight(rover2022);
+
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    const finalPosition = moveRoverForward(rover2022, grid);
+
+    expect(afterRotation).toBe(
+      "Rover current position: {X:0 Y:0, Direction:E }"
+    );
+    expect(finalPosition).toBe(
+      "Rover is lost. Last known position: {X: 2, Y: 0, Direction: E}"
+    );
+  });
+
+  it("Rover from position X:2 Y:5 after changing direction from West to South, should go to South and Get Lost after 6 movements", () => {
+    const rover2022 = new MarsRover(2, 5, "W");
+    const grid = gridGenerator(3, 6);
+
+    const afterRotation = rotateRoverToLeft(rover2022);
+
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    const finalPosition = moveRoverForward(rover2022, grid);
+
+    expect(afterRotation).toBe(
+      "Rover current position: { X:2 Y:5, Direction:S }"
+    );
+    expect(finalPosition).toBe(
+      "Rover is lost. Last known position: {X: 2, Y: 0, Direction: S}"
+    );
+  });
+
+  it("Rover from position X:2 Y:5 after changing direction from South to West, should go to West and Get Lost after 3 movements", () => {
+    const rover2022 = new MarsRover(2, 5, "S");
+    const grid = gridGenerator(3, 6);
+
+    const afterRotation = rotateRoverToRight(rover2022);
+
+    moveRoverForward(rover2022, grid);
+    moveRoverForward(rover2022, grid);
+    const finalPosition = moveRoverForward(rover2022, grid);
+
+    expect(afterRotation).toBe(
+      "Rover current position: {X:2 Y:5, Direction:W }"
+    );
+    expect(finalPosition).toBe(
+      "Rover is lost. Last known position: {X: 0, Y: 5, Direction: W}"
     );
   });
 });
