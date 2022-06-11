@@ -58,4 +58,34 @@ describe("Rover Parameters update after succesfull movement", () => {
     expect(rover2022.position.x).toBe(1);
     expect(rover2022.position.y).toBe(5);
   });
+
+  it("Rover moved from X:0 Y:5 Direction E to X:0 Y:4. Last position in rover logs", () => {
+    const rover2022 = new MarsRover(0, 5, "E");
+    const grid = gridGenerator(3, 6);
+
+    const roverWasLost = validateMovement(rover2022, grid);
+    roverParametersUpdate(rover2022, roverWasLost);
+    expect(rover2022.roverLogs[rover2022.roverLogs.length - 2].position.x).toBe(
+      0
+    );
+    expect(rover2022.roverLogs[rover2022.roverLogs.length - 2].position.y).toBe(
+      5
+    );
+  });
+
+  it("Rover has 'active' status after valid move", () => {
+    const rover2022 = new MarsRover(1, 1, "W");
+    const grid = gridGenerator(3, 6);
+    const roverWasLost = validateMovement(rover2022, grid);
+    roverParametersUpdate(rover2022, roverWasLost);
+    expect(rover2022.status).toBe("active");
+  });
+
+  it("Rover has 'lost' status after invalid move", () => {
+    const rover2022 = new MarsRover(0, 5, "N");
+    const grid = gridGenerator(3, 6);
+    const roverWasLost = validateMovement(rover2022, grid);
+    roverParametersUpdate(rover2022, roverWasLost);
+    expect(rover2022.status).toBe("lost");
+  });
 });
