@@ -41,11 +41,39 @@ function validateMovement(rover, grid) {
 }
 
 function roverParametersUpdate(rover, roverWasLost) {
+  let roverPositionX = rover.position.x;
+  let roverPositionY = rover.position.y;
+  let roverOrient = rover.orientation;
   // Do movement and update: push the previous position to roverLogs && the rover's current position
-  // for all direction N E S W
-  // add rover log
-  // update rover position
-  // change status if lost
+  if (roverOrient === "N") {
+    // add rover log
+
+    // update rover position
+    rover.position.y = roverPositionY + 1;
+
+    // change status if lost
+  } else if (roverOrient === "E") {
+    // add rover log
+
+    // update rover position
+    rover.position.x = roverPositionX + 1;
+
+    // change status if lost
+  } else if (roverOrient === "S") {
+    // add rover log
+
+    // update rover position
+    rover.position.y = roverPositionY - 1;
+
+    // change status if lost
+  } else if (roverOrient === "W") {
+    // add rover log
+
+    // update rover position
+    rover.position.x = roverPositionX - 1;
+
+    // change status if lost
+  }
 }
 
 module.exports = { moveRoverForward, validateMovement, roverParametersUpdate };
