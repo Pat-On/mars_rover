@@ -9,9 +9,9 @@ For development, you will only need Node.js and npm, installed in your environem
 
 ## Main dependencies
 
-prompt-sync [prompt-sync npm page](https://www.npmjs.com/package/prompt-sync)
+- #### prompt-sync [prompt-sync npm page](https://www.npmjs.com/package/prompt-sync)
 
-jest [jest npm page](https://www.npmjs.com/package/jest)
+- #### jest [jest npm page](https://www.npmjs.com/package/jest)
 
 ### Node
 - #### Node installation on Windows
