@@ -1,8 +1,14 @@
-// move rover forward - 1 field
-//              N: y = y + 1
-//      W: x= x - 1         E: x = x + 1
-//              S: y = y - 1
+const MarsRover = require("./marsRover");
 
+/**
+ * The moveRoverForward function orchestrates the steps required to move the rover
+ * by calling validateMovements and roverParametersUpdate functions.
+ * The function returns a conditionally string containing information about the rover's current status.
+ *
+ * @param   { MarsRover } rover  The object representation of the rover moving on the grid.
+ * @param   { Array }     grid   The two-dimensional array represents a grid.
+ * @returns { String }           A string describes the current position of the rover on x-axis and y-axis with orientation
+ */
 function moveRoverForward(rover, grid) {
   // Guard statement - If the rover is lost, You can not communicate with it and update values.
   if (rover.status === "active") {
@@ -30,6 +36,13 @@ function moveRoverForward(rover, grid) {
   }
 }
 
+/**
+ * The validateMovement function checks if the rover moves off the grid.
+ *
+ * @param   { MarsRover } rover  The object representation of the rover moving on the grid.
+ * @param   { Array }     grid   The two-dimensional array represents a grid.
+ * @returns { Boolean }          True when a rover moves off the grid, and false when the move was valid.
+ */
 function validateMovement(rover, grid) {
   const roverPositionX = rover.position.x;
   const roverPositionY = rover.position.y;
@@ -51,6 +64,14 @@ function validateMovement(rover, grid) {
   return false;
 }
 
+/**
+ * The roverParametersUpdate function updates the rover's current position after a move,
+ * adding its previous position and direction to the rover's log and updating its status (lost or active).
+ *
+ * @param   { MarsRover } rover         The object representation of the rover moving on the grid.
+ * @param   { Boolean }   roverWasLost  True when a rover was lost, and false when a rover was not lost.
+ * @return                              This function has no return.
+ */
 function roverParametersUpdate(rover, roverWasLost) {
   let roverPositionX = rover.position.x;
   let roverPositionY = rover.position.y;

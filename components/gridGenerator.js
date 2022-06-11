@@ -1,8 +1,10 @@
-// grid generator
-// [[0, 1, 2, 3],
-//  [0, 1, 2, 3],
-//  [0, 1, 2, 3]]
-
+/**
+ * The gridGenerator generates a two-dimensional array - grid.
+ *
+ * @param {int} x Defining x-axis length.
+ * @param {int} y Defining y-axis length.
+ * @returns {Array}
+ */
 function gridGenerator(x, y) {
   const varX = +x;
   const varY = +y;
