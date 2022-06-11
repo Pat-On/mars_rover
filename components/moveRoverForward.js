@@ -47,32 +47,48 @@ function roverParametersUpdate(rover, roverWasLost) {
   // Do movement and update: push the previous position to roverLogs && the rover's current position
   if (roverOrient === "N") {
     // add rover log
-
+    rover.roverLogs.push({
+      position: { ...rover.position },
+      orientation: rover.orientation,
+    });
     // update rover position
     rover.position.y = roverPositionY + 1;
 
     // change status if lost
+    rover.status = roverWasLost ? "lost" : "active";
   } else if (roverOrient === "E") {
     // add rover log
-
+    rover.roverLogs.push({
+      position: { ...rover.position },
+      orientation: rover.orientation,
+    });
     // update rover position
     rover.position.x = roverPositionX + 1;
 
     // change status if lost
+    rover.status = roverWasLost ? "lost" : "active";
   } else if (roverOrient === "S") {
     // add rover log
-
+    rover.roverLogs.push({
+      position: { ...rover.position },
+      orientation: rover.orientation,
+    });
     // update rover position
     rover.position.y = roverPositionY - 1;
 
     // change status if lost
+    rover.status = roverWasLost ? "lost" : "active";
   } else if (roverOrient === "W") {
     // add rover log
-
+    rover.roverLogs.push({
+      position: { ...rover.position },
+      orientation: rover.orientation,
+    });
     // update rover position
     rover.position.x = roverPositionX - 1;
 
     // change status if lost
+    rover.status = roverWasLost ? "lost" : "active";
   }
 }
 
