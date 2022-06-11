@@ -5,9 +5,18 @@
 
 function moveRoverForward(rover, grid) {
   // Guard statement - If the rover is lost, You can not communicate with it and update values.
-  // Validation of the move on the grid
-  // Updating the rover parameters
+  if (rover.status === "active") {
+    // Validation of the move on the grid
+    const roverWasLost = validateMovement(rover, grid);
+    // Updating the rover parameters
+    roverParametersUpdate(rover, roverWasLost);
+  }
   // Condidational return - rover lost or no
+  if (rover.status === "lost") {
+    return "lost";
+  } else {
+    return "not lost";
+  }
 }
 
 function validateMovement(rover, grid) {
@@ -31,6 +40,12 @@ function validateMovement(rover, grid) {
   return false;
 }
 
-function roverParametersUpdate(rover, roverWasLost) {}
+function roverParametersUpdate(rover, roverWasLost) {
+  // Do movement and update: push the previous position to roverLogs && the rover's current position
+  // for all direction N E S W
+  // add rover log
+  // update rover position
+  // change status if lost
+}
 
 module.exports = { moveRoverForward, validateMovement, roverParametersUpdate };

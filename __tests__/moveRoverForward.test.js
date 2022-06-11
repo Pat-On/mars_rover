@@ -36,3 +36,26 @@ describe("Validate Movements - Does Rover move off the grid", () => {
     expect(roverWasLost).toBe(false);
   });
 });
+
+describe("Rover Parameters update after succesfull movement", () => {
+  it("Rover moved from X:0 Y:5 Direction S to X:0 Y:4 ", () => {
+    const rover2022 = new MarsRover(0, 5, "S");
+    const grid = gridGenerator(3, 6);
+
+    const roverWasLost = validateMovement(rover2022, grid);
+    roverParametersUpdate(rover2022, roverWasLost);
+
+    expect(rover2022.position.x).toBe(0);
+    expect(rover2022.position.y).toBe(4);
+  });
+  it("Rover moved from X:0 Y:5 Direction E to X:0 Y:4 ", () => {
+    const rover2022 = new MarsRover(0, 5, "E");
+    const grid = gridGenerator(3, 6);
+
+    const roverWasLost = validateMovement(rover2022, grid);
+    roverParametersUpdate(rover2022, roverWasLost);
+
+    expect(rover2022.position.x).toBe(1);
+    expect(rover2022.position.y).toBe(5);
+  });
+});
